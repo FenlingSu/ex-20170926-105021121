@@ -11,7 +11,7 @@ public class MainFrame extends Frame {
     private Button btnSub = new Button("Sub");
     private Button btnexit = new Button("Exit");
     private Label lab = new Label(">uO");
-    private int n = 0, labX = 50, labY = 50;
+    private int n = 0, labX = 50, labY = 50, r=255, g=255, b=255;
     private boolean flag=true;                                          //是否開關
     private Timer t1;                                                   //宣告計數器
 
@@ -31,9 +31,9 @@ public class MainFrame extends Frame {
         });
 
         this.setLayout(null);                                            //取消原件大小設定
-        lab.setBounds(labX, labY, 130, 30);                  //設定標籤
+        lab.setBounds(labX, labY, 30, 30);                  //設定標籤
         this.add(lab);                                                   //在視窗顯示標籤
-        //this.setBackground(new Color(0xC2F5CD));                         更改顏色
+
 
         btnAdd.setBounds(30, 300, 130, 30);
         this.add(btnAdd);
@@ -75,23 +75,27 @@ public class MainFrame extends Frame {
                 if (flag) {
                     labX += 5;
                     lab.setLocation(labX, labY);
-                    if (labX > MainFrame.this.getWidth()) {
-                        flag=false;
+                    if (g - 3 > 0) {
+                        g -= 3;
+                        b -= 3;
                     }
-                }
-                else {
+                    if (labX > MainFrame.this.getWidth()) {
+                        flag = false;
+                    }
+                } else {
                     labX -= 5;
                     lab.setLocation(labX, labY);
+                    if (g + 3 < 255) {                              //顏色更動
+                        g += 3;
+                        b += 3;
+                    }
                     if (labX < 0) {
-                        flag=true;
+                        flag = true;
                     }
                 }
+                lab.setBackground(new Color(r, g, b));
             }
         });
-
-
-
-
     }
 }
 
